@@ -29,8 +29,8 @@ proyek-ecommerce/
     ├── products_dataset.csv
     ├── product_category_name_translation.csv
     └── customers_dataset.csv
-
 ---
+```
 
 # Installation and Execution
 
@@ -42,18 +42,18 @@ Ensure you have placed all the **E-Commerce Public Dataset (.csv files)** inside
 ## 2. Quick Start (Terminal Commands)
 
 Copy and execute the following commands in your terminal to install dependencies and launch the dashboard:
-
+```
 ```bash
 # Install required technical dependencies
 pip install -r requirements.txt
-
+```
+```bash
 # Launch the interactive Streamlit dashboard
 streamlit run dashboard.py
 ```
 
----
 
-## 3. Detailed Analysis
+##  Detailed Analysis
 
 To review the full **Data Wrangling, Cleaning, and Exploratory Data Analysis (EDA)** methodology, run:
 
