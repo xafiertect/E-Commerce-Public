@@ -32,40 +32,70 @@ proyek-ecommerce/
 
 ---
 
+# Installation and Execution
 
+## 1. Environment Setup
+Ensure you have placed all the **E-Commerce Public Dataset (.csv files)** inside the `E-Commerce Public/` folder as specified in the directory structure.
 
-## Cara Menjalankan
+---
 
-### 1. Install dependensi
+## 2. Quick Start (Terminal Commands)
+
+Copy and execute the following commands in your terminal to install dependencies and launch the dashboard:
+
 ```bash
+# Install required technical dependencies
 pip install -r requirements.txt
-```
 
-### 2. Siapkan dataset
-Download E-Commerce Public Dataset dari Dicoding/Kaggle dan letakkan semua file `.csv` ke dalam folder `data/`.
-
-### 3. Jalankan Notebook
-```bash
-jupyter notebook notebook.ipynb
-```
-
-### 4. Jalankan Dashboard Streamlit
-```bash
+# Launch the interactive Streamlit dashboard
 streamlit run dashboard.py
 ```
 
 ---
 
-## Pertanyaan Bisnis
+## 3. Detailed Analysis
 
-1. **Kategori produk apa yang menghasilkan revenue tertinggi dan bagaimana tren penjualannya per bulan?**
-2. **Bagaimana distribusi review score pelanggan dan apakah waktu pengiriman mempengaruhi kepuasan pelanggan?**
+To review the full **Data Wrangling, Cleaning, and Exploratory Data Analysis (EDA)** methodology, run:
+
+```bash
+jupyter notebook notebook.ipynb
+```
 
 ---
 
-## Fitur Dashboard
+# Business Objectives
 
--  **Overview** — Ringkasan eksekutif + tren bulanan
--  **Pertanyaan 1** — Analisis revenue per kategori produk
--  **Pertanyaan 2** — Analisis kepuasan pelanggan & pengiriman
--  **RFM Analysis** — Segmentasi pelanggan (analisis lanjutan)
+The analysis is structured to address critical **Key Performance Indicators (KPIs)** through the following inquiries:
+
+##  Revenue Growth Analysis
+- Identify product categories with the highest revenue
+- Monitor monthly sales trends over time
+
+## Logistics and Satisfaction
+- Analyze distribution of customer review scores
+- Evaluate impact of shipping lead times on customer satisfaction
+
+---
+
+# Dashboard Features
+
+##  Executive Overview
+- High-level summary of business performance
+- Total revenue insights
+- Monthly trends visualization
+
+##  Product Performance
+- Revenue distribution across product categories
+- Identify top-performing products
+
+##  Logistics Analysis
+- Shipping efficiency insights
+- Correlation between delivery time and customer satisfaction
+
+##  RFM Segmentation
+- Customer segmentation based on:
+  - Recency
+  - Frequency
+  - Monetary
+- Identify high-value customers
+- Provide actionable business strategies
