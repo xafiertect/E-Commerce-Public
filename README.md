@@ -1,20 +1,27 @@
-# E-Commerce-Public
-Interactive E-Commerce Data Analysis Dashboard built with Streamlit.  This project explores sales performance, customer satisfaction, and customer segmentation (RFM) using real-world datasets.  Includes data cleaning, exploratory analysis, and business insights to support data-driven decision making.
+# E-Commerce Data Analytics Dashboard
+![Python](https://img.shields.io/badge/Python-3.9+-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-Framework-FF4B4B)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Analysis](https://img.shields.io/badge/Analysis-RFM-orange)
 
-# Proyek Analisis Data: E-Commerce Public Dataset
-**Nama:** Rizqi Maulidiyah  
-**Email:** elkanaxafier@gmail.com  
+## Project Overview
+This repository contains a comprehensive data analysis project focusing on the E-Commerce Public Dataset. The objective is to perform end-to-end data processing—including Data Wrangling and Exploratory Data Analysis (EDA)—to provide actionable insights into sales performance and customer behavior.
+
+## Author
+* **Name:** Rizqi Maulidiyah
+* **Email:** elkanaxafier@gmail.com
+* **Role:** AI Engineer
 
 ---
 
-## Struktur Proyek
-```
+## Project Structure
+```text
 proyek-ecommerce/
-├── notebook.ipynb          # Notebook analisis lengkap
-├── dashboard.py            # Dashboard Streamlit
-├── requirements.txt        # Dependensi Python
-├── README.md               # File ini
-└── E-Commerce Public/                   # Letakkan semua file CSV di sini
+├── notebook.ipynb          # Comprehensive analysis and data processing
+├── dashboard.py            # Streamlit interactive dashboard source code
+├── requirements.txt        # Technical dependencies
+├── README.md               # Project documentation
+└── E-Commerce Public/      # Dataset directory (CSV files)
     ├── orders_dataset.csv
     ├── order_items_dataset.csv
     ├── order_payments_dataset.csv
@@ -22,9 +29,10 @@ proyek-ecommerce/
     ├── products_dataset.csv
     ├── product_category_name_translation.csv
     └── customers_dataset.csv
-```
 
 ---
+
+
 
 ## Cara Menjalankan
 
