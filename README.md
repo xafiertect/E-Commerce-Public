@@ -42,7 +42,7 @@ Ensure you have placed all the **E-Commerce Public Dataset (.csv files)** inside
 ## 2. Quick Start (Terminal Commands)
 
 Copy and execute the following commands in your terminal to install dependencies and launch the dashboard:
-```
+
 ```bash
 # Install required technical dependencies
 pip install -r requirements.txt
