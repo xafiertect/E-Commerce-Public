@@ -17,8 +17,8 @@ This repository contains a comprehensive data analysis project focusing on the E
 ## Project Structure
 ```text
 proyek-ecommerce/
-├── notebook.ipynb          # Comprehensive analysis and data processing
-├── dashboard.py            # Streamlit interactive dashboard source code
+├── Proyek_Analisis_Data.ipynb         # Comprehensive analysis and data processing
+├── app.py            # Streamlit interactive dashboard source code
 ├── requirements.txt        # Technical dependencies
 ├── README.md               # Project documentation
 └── E-Commerce Public/      # Dataset directory (CSV files)
@@ -49,7 +49,7 @@ pip install -r requirements.txt
 ```
 ```bash
 # Launch the interactive Streamlit dashboard
-streamlit run dashboard.py
+streamlit run app.py
 ```
 
 
