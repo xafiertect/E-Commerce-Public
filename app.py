@@ -7,7 +7,7 @@ import seaborn as sns
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Page config ───────────────────────────────────────────────────────────────
+#  Page config 
 st.set_page_config(
     page_title="E-Commerce Dashboard",
     page_icon=":shopping_cart:",
@@ -15,7 +15,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ── Global CSS ────────────────────────────────────────────────────────────────
+#  Global CSS 
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
@@ -142,7 +142,7 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 </style>
 """, unsafe_allow_html=True)
 
-# ── Matplotlib style ──────────────────────────────────────────────────────────
+#  Matplotlib style 
 plt.rcParams.update({
     'font.family': 'sans-serif',
     'axes.spines.top': False,
@@ -170,7 +170,7 @@ AMBER  = '#e8a000'
 SLATE  = '#6b7a99'
 PURPLE = '#7c3aed'
 
-# ── Load data ─────────────────────────────────────────────────────────────────
+#  Load data 
 @st.cache_data
 def load_data():
     try:
@@ -213,7 +213,7 @@ def load_data():
 
 df = load_data()
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
+#  Sidebar 
 with st.sidebar:
     st.markdown("""
     <div class="sb-brand">
@@ -244,7 +244,7 @@ if df is None:
     st.warning("Data belum tersedia. Letakkan file CSV di dalam folder `E-Commerce Public Dataset/`.")
     st.stop()
 
-# ── Apply filters ─────────────────────────────────────────────────────────────
+#  Apply filters 
 filtered = df[df['order_year'].isin(selected_years)].copy() if selected_years else df.copy()
 if selected_cat != 'Semua':
     filtered = filtered[filtered['product_category_name_english'] == selected_cat]
@@ -255,7 +255,7 @@ if filtered.empty:
     st.stop()
 
 
-# ── PAGE HEADER ───────────────────────────────────────────────────────────────
+#  PAGE HEADER 
 st.markdown("""
 <div class="page-header">
     <p class="title">E-Commerce Analytics Dashboard</p>
@@ -264,7 +264,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 1 — KPI CARDS ─────────────────────────────────────────────────────
+#  SECTION 1 — KPI CARDS 
 total_orders  = filtered['order_id'].nunique()
 total_revenue = filtered['price'].sum()
 avg_review    = filtered['review_score'].mean()
@@ -308,7 +308,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 2 — TREN BULANAN + TAHUNAN ───────────────────────────────────────
+#  SECTION 2 — TREN BULANAN + TAHUNAN 
 st.markdown('<div class="section-label">Tren Bulanan — Revenue &amp; Jumlah Pesanan</div>', unsafe_allow_html=True)
 
 monthly = (
@@ -375,7 +375,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 3 — REVENUE & KATEGORI PRODUK ────────────────────────────────────
+#  SECTION 3 — REVENUE & KATEGORI PRODUK 
 st.markdown('<div class="section-label">Revenue &amp; Kategori Produk</div>', unsafe_allow_html=True)
 
 revenue_cat = (
@@ -444,7 +444,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 4 — ANALISIS GEOGRAFI ────────────────────────────────────────────
+#  SECTION 4 — ANALISIS GEOGRAFI 
 st.markdown('<div class="section-label">Analisis Geografi — Distribusi per State</div>', unsafe_allow_html=True)
 
 geo_state = (
@@ -524,7 +524,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 5 — KEPUASAN PELANGGAN ───────────────────────────────────────────
+#  SECTION 5 — KEPUASAN PELANGGAN 
 st.markdown('<div class="section-label">Kepuasan Pelanggan — Review Score &amp; Pengiriman</div>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
@@ -627,7 +627,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 6 — KORELASI ─────────────────────────────────────────────────────
+#  SECTION 6 — KORELASI 
 st.markdown('<div class="section-label">Korelasi — Harga, Ongkir, Pengiriman &amp; Kepuasan</div>', unsafe_allow_html=True)
 
 corr_cols = ['price', 'freight_value', 'delivery_days', 'delivery_delay', 'review_score']
@@ -690,7 +690,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 7 — POLA WAKTU PEMESANAN ─────────────────────────────────────────
+#  SECTION 7 — POLA WAKTU PEMESANAN 
 st.markdown('<div class="section-label">Pola Waktu Pemesanan — Per Jam &amp; Per Hari</div>', unsafe_allow_html=True)
 
 hour_order = filtered.groupby('order_hour')['order_id'].nunique().reset_index()
@@ -754,7 +754,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── SECTION 8 — SEGMENTASI RFM ───────────────────────────────────────────────
+#  SECTION 8 — SEGMENTASI RFM 
 st.markdown('<div class="section-label">Segmentasi Pelanggan — RFM (Recency · Frequency · Monetary)</div>', unsafe_allow_html=True)
 
 rfm_raw = filtered.dropna(subset=['customer_unique_id', 'order_purchase_timestamp', 'price'])
@@ -770,7 +770,7 @@ rfm = rfm_raw.groupby('customer_unique_id').agg(
     Monetary =('price', 'sum')
 ).reset_index()
 
-# ── FIX UTAMA: gunakan qcut+rank agar selalu aman ────────────────────────────
+#  FIX UTAMA: gunakan qcut+rank agar selalu aman 
 rfm['R_Score'] = pd.qcut(rfm['Recency'].rank(method='first'),  q=4, labels=[4, 3, 2, 1]).astype(int)
 rfm['F_Score'] = pd.qcut(rfm['Frequency'].rank(method='first'), q=4, labels=[1, 2, 3, 4]).astype(int)
 rfm['M_Score'] = pd.qcut(rfm['Monetary'].rank(method='first'),  q=4, labels=[1, 2, 3, 4]).astype(int)
@@ -844,7 +844,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Footer ────────────────────────────────────────────────────────────────────
+#  Footer 
 st.divider()
 st.markdown("""
 <p style="text-align:center; color:#8892a4; font-size:0.75rem; letter-spacing:0.04em;">

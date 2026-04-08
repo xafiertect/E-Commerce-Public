@@ -58,7 +58,7 @@ streamlit run app.py
 To review the full **Data Wrangling, Cleaning, and Exploratory Data Analysis (EDA)** methodology, run:
 
 ```bash
-jupyter notebook notebook.ipynb
+jupyter notebook Proyek_Analisis_Data.ipynb
 ```
 
 ---
