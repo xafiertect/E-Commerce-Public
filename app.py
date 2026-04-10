@@ -324,9 +324,9 @@ if not monthly.empty:
     ax2.bar(x, monthly['orders'], color=BLUE2, alpha=0.35, zorder=1, label='Orders')
     ax1.fill_between(x, monthly['revenue'] / 1e3, alpha=0.12, color=BLUE, zorder=2)
     ax1.plot(x, monthly['revenue'] / 1e3, color=BLUE, linewidth=2, marker='o', markersize=3.5, zorder=3, label='Revenue')
-    step = max(1, len(monthly) // 10)
+    step = max(1, len(monthly) // 8)
     ax1.set_xticks(range(0, len(monthly), step))
-    ax1.set_xticklabels(monthly['order_month'].iloc[::step], rotation=40, ha='right')
+    ax1.set_xticklabels(monthly['order_month'].iloc[::step], rotation=45, ha='right', fontsize=8)
     ax1.set_ylabel('Revenue (Ribu BRL)', color=BLUE)
     ax2.set_ylabel('Jumlah Order', color=SLATE)
     ax1.tick_params(axis='y', colors=BLUE)
@@ -400,6 +400,7 @@ if not revenue_cat.empty:
     axes[0].set_title(f'Top {col_n} Kategori — Revenue')
     axes[0].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.1fM'))
     axes[0].grid(axis='y', alpha=0)
+    axes[0].set_yticklabels(axes[0].get_yticklabels(), fontsize=8)
 
     scatter_data = (
         filtered.groupby('product_category_name_english')
@@ -412,12 +413,16 @@ if not revenue_cat.empty:
                              s=np.clip(top20['revenue'] / 6000, 20, 2000), alpha=0.75,
                              c=top20['revenue'], cmap='Blues',
                              edgecolors='white', linewidth=0.8, zorder=3)
-        q_thresh = top20['revenue'].quantile(0.72) if len(top20) >= 3 else top20['revenue'].min()
+        q_thresh = top20['revenue'].quantile(0.80) if len(top20) >= 3 else top20['revenue'].min()
         for _, row in top20.iterrows():
             if row['revenue'] > q_thresh:
-                axes[1].annotate(row['product_category_name_english'],
+                label = row['product_category_name_english']
+                # truncate long labels
+                label = label[:18] + '…' if len(label) > 18 else label
+                axes[1].annotate(label,
                                  (row['orders'], row['avg_price']),
-                                 fontsize=6.5, ha='center', va='bottom', color=SLATE)
+                                 fontsize=6, ha='center', va='bottom', color=SLATE,
+                                 xytext=(0, 5), textcoords='offset points')
         axes[1].set_xlabel('Jumlah Order')
         axes[1].set_ylabel('Rata-rata Harga (BRL)')
         axes[1].set_title('Volume Order vs Harga Rata-rata\n(ukuran lingkaran = total revenue)')
@@ -502,10 +507,13 @@ if not geo_state.empty:
         alpha=0.85, edgecolors='white', linewidth=1, zorder=3,
         vmin=1, vmax=5
     )
-    for _, row in geo_state.iterrows():
+    # Only annotate top 10 states by revenue to avoid label overlap
+    top_states = geo_state.nlargest(10, 'total_revenue')
+    for _, row in top_states.iterrows():
         ax.annotate(row['customer_state'],
                     (row['total_orders'], row['total_revenue']/1e6),
-                    fontsize=7.5, ha='center', va='bottom', color='#333333')
+                    fontsize=7.5, ha='center', va='bottom', color='#333333',
+                    xytext=(0, 4), textcoords='offset points')
     plt.colorbar(sc, ax=ax, label='Avg Review Score', shrink=0.8)
     ax.set_xlabel('Jumlah Order')
     ax.set_ylabel('Total Revenue (Juta BRL)')
@@ -818,7 +826,7 @@ with col2:
         ax.bar(x,     seg_m['Frequency'], w, label='Frequency',          color=BLUE,      alpha=0.85)
         ax.bar(x + w, seg_m['Monetary'],  w, label='Monetary (BRL/100)', color=GREEN,     alpha=0.85)
         ax.set_xticks(x)
-        ax.set_xticklabels(seg_m.index, rotation=15, ha='right', fontsize=8)
+        ax.set_xticklabels(seg_m.index, rotation=20, ha='right', fontsize=8)
         ax.set_title('Perbandingan RFM per Segmen')
         ax.legend(fontsize=7.5, framealpha=0.9, edgecolor='#e8ecf2')
         plt.tight_layout()
